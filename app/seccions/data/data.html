@@ -1,0 +1,66 @@
+<div class="container containerData" ng-init="loadData()">
+    <p class="fs-1 textDataTitle">Listado de datos</p>
+    <p class="fst-italic">Obteniendo datos de: {{contacto}}</p>
+
+    <div class="linea"></div>
+
+    <div ng-show="gridOptions.data.length == 0" class="d-flex justify-content-center">
+        <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+
+    <div class="container" ng-show="gridOptions.data.length != 0">
+        <div class="row ">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="orderIdFilter">Buscar por Booking Id</label>
+                    <input id="orderIdFilter" type="text" class="form-control order-search-box" ng-change="gridActions.filter()" ng-model="bookingId" filter-by="bookingId" filter-type="text">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="orderIdFilter">Buscar por Booking Price</label>
+                    <input id="orderIdFilter" type="text" class="form-control order-search-box" ng-change="gridActions.filter()" ng-model="bookingPrice" filter-by="bookingPrice" filter-type="text">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mt-5" grid-data grid-options="gridOptions" grid-actions="gridActions">
+            <p class="fst-italic" style="color: red;"> * Para ordenar de forma ascendente/descendente, presione el titulo de la columna correspondiente</p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th sortable="bookingId" class="sortable">
+                            BookingId
+                        </th>
+                        <th sortable="cliente" class="sortable">
+                            Cliente
+                        </th>
+                        <th sortable="bookingTime " class="sortable ">
+                            Fecha de Creación
+                        </th>
+                        <th sortable='streetAddress' class="sortable ">
+                            Dirección
+                        </th>
+                        <th sortable='bookingPrice' class="sortable ">
+                            Precio
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr grid-item>
+                        <td ng-bind="item.bookingId "></td>
+                        <td ng-bind="item.cliente "></td>
+                        <td ng-bind="item.bookingTime | date: 'MM/dd/yyyy' "></td>
+                        <td ng-bind="item.streetAddress "></td>
+                        <td ng-bind="item.bookingPrice "></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
